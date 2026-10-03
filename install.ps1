@@ -30,12 +30,13 @@ function Add-UserEnvDir([string]$name, [string]$dir) {
     Write-Host "set     $name=$value (open a new terminal)"
 }
 
-# Claude Code: user CLAUDE.md imports AGENTS.md; Caveman output style; select it in settings.json.
+# Claude Code: user CLAUDE.md imports AGENTS.md and the Claude-only rules; Caveman output style; select it in settings.json.
 $claudeMd = Join-Path $home_ '.claude\CLAUDE.md'
-$import = '@~/ai-instructions/AGENTS.md'
-if (-not (Test-Path $claudeMd)) { New-Item -ItemType Directory -Force -Path (Split-Path $claudeMd) | Out-Null; Set-Content $claudeMd $import; Write-Host "wrote   $claudeMd" }
-elseif (-not (Select-String -Path $claudeMd -SimpleMatch $import -Quiet)) { Add-Content $claudeMd "`n$import"; Write-Host "appended $claudeMd" }
-else { Write-Host "ok      $claudeMd" }
+foreach ($import in '@~/ai-instructions/AGENTS.md', '@~/ai-instructions/claude/rules.md') {
+    if (-not (Test-Path $claudeMd)) { New-Item -ItemType Directory -Force -Path (Split-Path $claudeMd) | Out-Null; Set-Content $claudeMd $import; Write-Host "wrote   $claudeMd" }
+    elseif (-not (Select-String -Path $claudeMd -SimpleMatch $import -Quiet)) { Add-Content $claudeMd "`n$import"; Write-Host "appended $import" }
+    else { Write-Host "ok      $import" }
+}
 Link-Or-Copy (Join-Path $home_ '.claude\output-styles\caveman.md') (Join-Path $repo 'claude\output-styles\caveman.md')
 $settingsPath = Join-Path $home_ '.claude\settings.json'
 $settings = if (Test-Path $settingsPath) { Get-Content $settingsPath -Raw | ConvertFrom-Json } else { [pscustomobject]@{} }
