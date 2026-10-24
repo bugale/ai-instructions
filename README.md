@@ -2,7 +2,8 @@
 
 One set of rules for every AI coding assistant I use, on every machine.
 
-- [`AGENTS.md`](AGENTS.md): the rules. Simple English, Caveman response style, BEEP BOOP prefix, almost no code comments, PRs as drafts.
+- [`AGENTS.md`](AGENTS.md): the rules. Simple English, Caveman response style, BEEP BOOP prefix, almost no code comments, PRs as drafts,
+  atomic commits.
 - [`claude/output-styles/caveman.md`](claude/output-styles/caveman.md): the same response style as a Claude Code output style.
 - [`claude/rules.md`](claude/rules.md): rules only Claude can follow, such as turning on Auto-fix for a new PR in the desktop app.
 - [`claude/CLAUDE.md`](claude/CLAUDE.md): what the user-level Claude file contains: two import lines.

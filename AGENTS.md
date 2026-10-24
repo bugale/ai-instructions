@@ -42,3 +42,14 @@ reasoning in the PR description or in a doc instead.
 ## Pull requests
 
 Always open PRs as drafts. Never mark them ready for review unless I ask.
+
+## Commits
+
+Each commit is atomic: it does one thing, and you can revert it alone. The code builds and its tests pass after each commit.
+
+A PR can have many commits when each one does a different thing. For example: one fixes an unrelated typo, one adds a helper and its tests, and
+one uses that helper. One change that touches many files is still one commit.
+
+When you change a PR, amend the commit that the change belongs to. Add a new commit only for a new, separate change, never to fix another commit
+of the same PR. To amend an older commit, run `git commit --fixup=<commit>`, then `git rebase --autosquash <base>`. Before you force-push with
+`--force-with-lease`, check that the PR is still open. If it is merged, put the change in a new PR.
